@@ -1,9 +1,18 @@
+/*
+ * @Author: 文贝
+ * @Date: 2022-02-08 21:36:57
+ * @LastEditors: 文贝
+ * @LastEditTime: 2022-02-09 01:17:23
+ * @Descripttion:
+ * @FilePath: \rollup.config.ts
+ */
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
+// import {uglify} from 'rollup-plugin-uglify'
 
 const pkg = require('./package.json')
 
@@ -31,8 +40,8 @@ export default {
     // which external modules to include in the bundle
     // https://github.com/rollup/rollup-plugin-node-resolve#usage
     resolve(),
-
     // Resolve source maps to the original source
     sourceMaps(),
+    // uglify(),
   ],
 }

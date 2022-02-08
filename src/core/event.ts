@@ -2,11 +2,11 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:01:59
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-08 22:47:50
+ * @LastEditTime: 2022-02-08 23:10:37
  * @Descripttion:
  * @FilePath: \src\core\event.ts
  */
-import IEvent from "../interfaces/ievent"
+import { IEvent } from "../interfaces/interfaces"
 
 class Event implements IEvent {
   private _callbacks: { [key: string]: Array<Function> } = {}
