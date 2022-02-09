@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-09 00:39:00
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 01:08:01
+ * @LastEditTime: 2022-02-09 17:31:27
  * @Descripttion:
  * @FilePath: \src\core\utils.ts
  */
@@ -13,7 +13,7 @@ export default class Utils {
    *  taskService will be equal to ics.services.task
    *  first argument (root) must be defined first
    ************************************************************/
-  public createNamespace(root: any, ns: string): object {
+  public static createNamespace(root: any, ns: string): object {
     let parts: Array<string> = ns.split('.')
     for (let i: number = 0; i < parts.length; i++) {
       if (typeof root[parts[i]] == 'undefined') {
@@ -29,7 +29,7 @@ export default class Utils {
    *  Example:
    *  replaceAll('This is a test string', 'is', 'X') = 'ThX X a test string'
    ************************************************************/
-  public replaceAll(str: string, search: string, replacement: string): string {
+  public static replaceAll(str: string, search: string, replacement: string): string {
     var fix = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     return str.replace(new RegExp(fix, 'g'), replacement)
   }
@@ -38,7 +38,7 @@ export default class Utils {
    *  Example:
    *  formatString('Hello {0}','Tuana') = 'Hello Tuana'
    ************************************************************/
-  public formatString(): string | null {
+  public static formatString(): string | null {
     if (arguments.length < 1) {
       return null
     }
@@ -50,7 +50,7 @@ export default class Utils {
     return str
   }
 
-  public toPascalCase(str: string): string {
+  public static toPascalCase(str: string): string {
     if (!str || !str.length) {
       return str
     }
@@ -60,7 +60,7 @@ export default class Utils {
     return str.charAt(0).toUpperCase() + str.substring(1)
   }
 
-  public toCamelCase(str: string): string {
+  public static toCamelCase(str: string): string {
     if (!str || !str.length) {
       return str
     }
@@ -70,14 +70,14 @@ export default class Utils {
     return str.charAt(0).toLowerCase() + str.substring(1)
   }
 
-  public truncateString(str: string, maxLength: number): string {
+  public static truncateString(str: string, maxLength: number): string {
     if (!str || !str.length || str.length <= maxLength) {
       return str
     }
     return str.substring(0, maxLength)
   }
 
-  public truncateStringWithPostfix(str: string, maxLength: number, postfix: string): string {
+  public static truncateStringWithPostfix(str: string, maxLength: number, postfix: string): string {
     postfix = postfix || '...'
 
     if (!str || !str.length || str.length <= maxLength) {
@@ -89,7 +89,7 @@ export default class Utils {
     return str.substring(0, maxLength - postfix.length) + postfix
   }
 
-  public isFunction(obj: any): boolean {
+  public static isFunction(obj: any): boolean {
     return !!(obj && obj.constructor && obj.call && obj.apply)
   }
 
@@ -102,7 +102,7 @@ export default class Utils {
    * @param {Date} expireDate (optional). If not specified the cookie will expire at the end of session.
    * @param {string} path (optional)
    */
-  public buildQueryString(key: string, value: string, expireDate: Date, path: string): void {
+  public static buildQueryString(key: string, value: string, expireDate: Date, path: string): void {
     var cookieValue = encodeURIComponent(key) + '='
 
     if (value) {
@@ -127,7 +127,7 @@ export default class Utils {
    * @param {string} key
    * @returns {string} Cookie value or null
    */
-  public getCookieValue(key: string): string | null {
+  public static getCookieValue(key: string): string | null {
     var equalities = document.cookie.split('; ')
     for (var i = 0; i < equalities.length; i++) {
       if (!equalities[i]) {
@@ -147,7 +147,7 @@ export default class Utils {
     return null
   }
 
-  public deleteCookie(key: string, path: string): void {
+  public static deleteCookie(key: string, path: string): void {
     var cookieValue = encodeURIComponent(key) + '='
 
     cookieValue =
@@ -163,11 +163,29 @@ export default class Utils {
   /**
    * Escape HTML to help prevent XSS attacks.
    */
-  public htmlEscape(html: string): string {
+  public static htmlEscape(html: string): string {
     return html
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
+  }
+
+  /**
+   * @description:复制对象
+   * @param {object} dst 目的对象
+   * @param {object} src 源对象
+   * @return {*}
+   */
+  public static extend(dstObj: object, srcObj: object): object {
+    var keys = Object.keys(srcObj)
+    for (var i = 0; i < keys.length; i += 1) {
+      var val = srcObj[keys[i]]
+      dstObj[keys[i]] =
+        ['string', 'number', 'array', 'boolean'].indexOf(typeof val) === -1
+          ? this.extend(dstObj[keys[i]] || {}, val)
+          : val
+    }
+    return dstObj
   }
 }

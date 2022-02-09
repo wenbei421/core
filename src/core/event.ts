@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:01:59
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-08 23:10:37
+ * @LastEditTime: 2022-02-09 17:50:18
  * @Descripttion:
  * @FilePath: \src\core\event.ts
  */
@@ -70,8 +70,8 @@ class Event implements IEvent {
       return
     }
 
-    var args = Array.prototype.slice.call(arguments, 1)
-    for (var i = 0; i < callbacks.length; i++) {
+    let args = Array.prototype.slice.call(arguments, 1)
+    for (let i:number = 0; i < callbacks.length; i++) {
       callbacks[i].apply(this, args)
     }
   }

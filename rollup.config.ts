@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 21:36:57
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 01:17:23
+ * @LastEditTime: 2022-02-09 17:37:49
  * @Descripttion:
  * @FilePath: \rollup.config.ts
  */
@@ -12,7 +12,7 @@ import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
-// import {uglify} from 'rollup-plugin-uglify'
+import {uglify} from 'rollup-plugin-uglify'
 
 const pkg = require('./package.json')
 
@@ -42,6 +42,5 @@ export default {
     resolve(),
     // Resolve source maps to the original source
     sourceMaps(),
-    // uglify(),
   ],
 }

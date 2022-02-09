@@ -2,10 +2,20 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:24:51
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 00:30:07
+ * @LastEditTime: 2022-02-09 17:48:31
  * @Descripttion:
  * @FilePath: \src\interfaces\interfaces.ts
  */
+
+export class ExecOptons {
+  public url!: string
+  public method: string = 'GET'
+  public data: any = null
+  public timeout:number = 0
+  public contentType:string = 'text/xml; charset=UTF-8'
+  public async:boolean = true
+}
+
 export class UIOptions {
   public elm: string | null = null
   public busy: boolean = false
@@ -40,4 +50,14 @@ export interface ILogger {
   warn(logObject: any): void
   error(logObject: any): void
   fatal(logObject: any): void
+}
+
+export interface IImedx {
+  isImedx: boolean
+  cefSharp: Object
+  $on(eventName: string, callback: Function): void
+  $off(eventName: string, callback: Function): void
+  $emit(eventName: string): void
+  $command(opts: ExecOptons): void
+  $function(opts: ExecOptons): Promise<any>
 }

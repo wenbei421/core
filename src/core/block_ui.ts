@@ -2,32 +2,33 @@
  * @Author: 文贝
  * @Date: 2022-02-08 23:09:25
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 00:22:09
+ * @LastEditTime: 2022-02-09 17:28:50
  * @Descripttion:
  * @FilePath: \src\core\block_ui.ts
  */
 import { IBlockUI, UIOptions } from '../interfaces/interfaces'
 
-const $uiBlockArea = document.createElement('div')
-$uiBlockArea.classList.add('ics-block-area')
-
 export default class UIBlock implements IBlockUI {
+  private $uiBlockArea = document.createElement('div')
+  public constructor() {
+    this.$uiBlockArea.classList.add('ics-block-area')
+  }
   block(opts: UIOptions): void {
     if (!opts) opts = new UIOptions()
     let $elm = (opts.elm && document.querySelector(opts.elm)) || document.body
     if (opts.busy) {
-      $uiBlockArea.classList.add('ics-block-area-busy')
+      this.$uiBlockArea.classList.add('ics-block-area-busy')
     } else {
-      $uiBlockArea.classList.remove('ics-block-area-busy')
+      this.$uiBlockArea.classList.remove('ics-block-area-busy')
     }
 
     if (opts.elm && document.querySelector(opts.elm)) {
-      $uiBlockArea.style.position = 'absolute'
+      this.$uiBlockArea.style.position = 'absolute'
     } else {
-      $uiBlockArea.style.position = 'fixed'
+      this.$uiBlockArea.style.position = 'fixed'
     }
 
-    $elm.appendChild($uiBlockArea)
+    $elm.appendChild(this.$uiBlockArea)
 
     if (opts.promise) {
       let that = this
