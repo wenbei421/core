@@ -2,11 +2,11 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:01:59
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 17:50:18
+ * @LastEditTime: 2022-02-09 22:43:45
  * @Descripttion:
  * @FilePath: \src\core\event.ts
  */
-import { IEvent } from "../interfaces/interfaces"
+import { IEvent } from '../interfaces/interfaces'
 
 class Event implements IEvent {
   private _callbacks: { [key: string]: Array<Function> } = {}
@@ -14,9 +14,7 @@ class Event implements IEvent {
   /**
    * @description: 构造函数
    */
-  public constructor(){
-
-  }
+  public constructor() {}
 
   /**
    * @description:订阅事件
@@ -64,14 +62,12 @@ class Event implements IEvent {
    * @param {string} eventName
    * @return {void}
    */
-  public $emit(eventName: string): void {
+  public $emit(eventName: string, ...args: any[]): void {
     let callbacks = this._callbacks[eventName]
     if (!callbacks || !callbacks.length) {
       return
     }
-
-    let args = Array.prototype.slice.call(arguments, 1)
-    for (let i:number = 0; i < callbacks.length; i++) {
+    for (let i: number = 0; i < callbacks.length; i++) {
       callbacks[i].apply(this, args)
     }
   }

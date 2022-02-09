@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-09 12:32:05
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 17:58:43
+ * @LastEditTime: 2022-02-10 01:20:44
  * @Descripttion:
  * @FilePath: \src\core\imedx.ts
  */
@@ -11,10 +11,16 @@ import utils from './utils'
 
 export default class Imedx implements IImedx {
   private _callbacks: { [key: string]: Array<Function> } = {}
-  public isImedx: boolean = !!window['CefSharp']
-  public cefSharp: any = window['CefSharp'] || { PostMessage: () => {} }
+  public isImedx: boolean
+  public cefSharp: any
   private _baseCommandUrl: string = 'http://command.com/'
   private baseAjaxUrl: string = 'http://icreate.com/'
+
+  public constructor() {
+    const isNode = typeof window === 'undefined'
+    this.isImedx = isNode ? false : !!window['CefSharp']
+    this.cefSharp = isNode ? { PostMessage: () => {} } : window['CefSharp']
+  }
 
   public $command(opts: ExecOptons): void {
     let link = document.createElement('a')
@@ -168,6 +174,7 @@ export default class Imedx implements IImedx {
       for (var key in _option.data) {
         params.push(key + '=' + _option.data[key])
       }
+      console.log(_option.url + (params.length > 0 ? `?${params.join('&')}` : ''))
       xhr.open(
         _option.method,
         _option.url + (params.length > 0 ? `?${params.join('&')}` : ''),
@@ -180,6 +187,7 @@ export default class Imedx implements IImedx {
 
   // 创建XMLHttpRequest
   private _getXMLHttpRequest(): XMLHttpRequest {
+    // let XMLHttpRequest = require('xhr2');
     let xhr: XMLHttpRequest = new XMLHttpRequest()
     if (xhr.overrideMimeType) {
       xhr.overrideMimeType('text/xml')

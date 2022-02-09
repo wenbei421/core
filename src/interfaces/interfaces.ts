@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:24:51
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 17:48:31
+ * @LastEditTime: 2022-02-09 23:34:47
  * @Descripttion:
  * @FilePath: \src\interfaces\interfaces.ts
  */
@@ -10,10 +10,10 @@
 export class ExecOptons {
   public url!: string
   public method: string = 'GET'
-  public data: any = null
-  public timeout:number = 0
-  public contentType:string = 'text/xml; charset=UTF-8'
-  public async:boolean = true
+  public data: any
+  public timeout: number = 0
+  public contentType: string = 'text/xml; charset=UTF-8'
+  public async: boolean = true
 }
 
 export class UIOptions {

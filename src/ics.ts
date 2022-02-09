@@ -2,11 +2,18 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:01:59
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 17:41:24
+ * @LastEditTime: 2022-02-10 00:36:43
  * @Descripttion:
  * @FilePath: \src\ics.ts
  */
-import { IBlockUI, IEvent, ILogger } from './interfaces/interfaces'
+import {
+  ExecOptons,
+  IBlockUI,
+  IEvent,
+  ILogger,
+  LogLevels,
+  UIOptions
+} from './interfaces/interfaces'
 import Event from './core/event'
 import BlockUI from './core/block_ui'
 import Logger from './core/logger'
@@ -40,8 +47,10 @@ class Ics {
 
   public utils: Utils = Utils
 
-  public imedx:Imedx = new Imedx()
+  public imedx: Imedx = new Imedx()
 }
 
 const ics = new Ics()
-export default ics
+// export default ics
+
+export { ics, Event, BlockUI, Logger, Utils, Imedx, LogLevels, ExecOptons, UIOptions }
