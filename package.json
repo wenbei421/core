@@ -1,7 +1,7 @@
 {
   "name": "@icreate/core",
-  "version": "0.0.12",
-  "description": "",
+  "version": "0.0.15",
+  "description": "Ics核心包封装",
   "keywords": [],
   "main": "dist/ics.umd.js",
   "module": "dist/ics.es5.js",

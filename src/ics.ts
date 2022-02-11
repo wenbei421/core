@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:01:59
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-12 00:48:16
+ * @LastEditTime: 2022-02-12 01:47:40
  * @Descripttion:
  * @FilePath: \src\ics.ts
  */
@@ -48,6 +48,6 @@ class Ics {
 }
 
 const ics = new Ics()
-// export default ics
 
+// export default ics
 export { ics, Event, BlockUI, Logger, Utils, LogLevels, ExecOptons, UIOptions }

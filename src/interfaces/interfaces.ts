@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:24:51
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 23:34:47
+ * @LastEditTime: 2022-02-12 02:06:01
  * @Descripttion:
  * @FilePath: \src\interfaces\interfaces.ts
  */
@@ -50,14 +50,4 @@ export interface ILogger {
   warn(logObject: any): void
   error(logObject: any): void
   fatal(logObject: any): void
-}
-
-export interface IImedx {
-  isImedx: boolean
-  cefSharp: Object
-  $on(eventName: string, callback: Function): void
-  $off(eventName: string, callback: Function): void
-  $emit(eventName: string): void
-  $command(opts: ExecOptons): void
-  $function(opts: ExecOptons): Promise<any>
 }
