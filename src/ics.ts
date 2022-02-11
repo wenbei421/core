@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:01:59
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-10 00:36:43
+ * @LastEditTime: 2022-02-12 00:48:16
  * @Descripttion:
  * @FilePath: \src\ics.ts
  */
@@ -18,7 +18,6 @@ import Event from './core/event'
 import BlockUI from './core/block_ui'
 import Logger from './core/logger'
 import Utils from './core/utils'
-import Imedx from './core/imedx'
 
 class Ics {
   // private static _singleton: Ics | null = null
@@ -45,12 +44,10 @@ class Ics {
 
   public log: ILogger = new Logger()
 
-  public utils: Utils = Utils
-
-  public imedx: Imedx = new Imedx()
+  public utils = Utils
 }
 
 const ics = new Ics()
 // export default ics
 
-export { ics, Event, BlockUI, Logger, Utils, Imedx, LogLevels, ExecOptons, UIOptions }
+export { ics, Event, BlockUI, Logger, Utils, LogLevels, ExecOptons, UIOptions }

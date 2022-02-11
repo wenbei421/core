@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-09 00:24:01
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 00:37:12
+ * @LastEditTime: 2022-02-12 00:51:58
  * @Descripttion:
  * @FilePath: \src\core\logger.ts
  */
@@ -25,7 +25,7 @@ export default class Logger implements ILogger {
    * @description: 输出调试日志
    * @param {any} logObject 日志对象
    */
-  debug(logObject: any): void {
+   public debug(logObject: any): void {
     this.log('DEBUG: ', LogLevels.DEBUG)
     this.log(logObject, LogLevels.DEBUG)
   }
@@ -34,7 +34,7 @@ export default class Logger implements ILogger {
    * @description: 输出信息日志
    * @param {any} logObject 日志对象
    */
-  info(logObject: any): void {
+   public info(logObject: any): void {
     this.log('INFO: ', LogLevels.INFO)
     this.log(logObject, LogLevels.INFO)
   }
@@ -43,7 +43,7 @@ export default class Logger implements ILogger {
    * @description: 输出警告日志
    * @param {any} logObject 日志对象
    */
-  warn(logObject: any): void {
+   public warn(logObject: any): void {
     this.log('WARN: ', LogLevels.WARN)
     this.log(logObject, LogLevels.WARN)
   }
@@ -52,7 +52,7 @@ export default class Logger implements ILogger {
    * @description: 输出错误日志
    * @param {any} logObject 日志对象
    */
-  error(logObject: any): void {
+   public error(logObject: any): void {
     this.log('ERROR: ', LogLevels.ERROR)
     this.log(logObject, LogLevels.ERROR)
   }
@@ -61,7 +61,7 @@ export default class Logger implements ILogger {
    * @description: 输出致命错误日志
    * @param {any} logObject 日志对象
    */
-  fatal(logObject: any): void {
+   public fatal(logObject: any): void {
     this.log('FATAL: ', LogLevels.FATAL)
     this.log(logObject, LogLevels.FATAL)
   }

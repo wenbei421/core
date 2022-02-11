@@ -2,11 +2,15 @@
  * @Author: 文贝
  * @Date: 2022-02-09 00:39:00
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 17:31:27
+ * @LastEditTime: 2022-02-12 00:29:26
  * @Descripttion:
  * @FilePath: \src\core\utils.ts
  */
+import { ExecOptons } from '../interfaces/interfaces'
+
 export default class Utils {
+  private static _baseCommandUrl: string = 'http://command.com/'
+  private static _baseAjaxUrl: string = 'http://icreate.com/'
   /* Creates a name namespace.
    *  Example:
    *  var taskService = createNamespace(ics, 'services.task');
@@ -187,5 +191,112 @@ export default class Utils {
           : val
     }
     return dstObj
+  }
+
+
+  public static command(opts: ExecOptons): void {
+    let link = document.createElement('a')
+    let params: Array<string> = []
+    for (let key in opts.data) {
+      params.push(key + '=' + opts.data[key])
+    }
+    link.href = `${this._baseCommandUrl}${opts.url}${
+      params.length > 0 ? `?${params.join('&')}` : ''
+    }`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  public static function(opts: ExecOptons): Promise<any> {
+    let that = this
+    return new Promise<XMLHttpRequest>((resolve, reject) => {
+      this._ajax({
+        ...opts,
+        url: `${this._baseAjaxUrl}${opts.url}`,
+        method: opts.method || 'GET'
+      })
+        .then(xhr => {
+          try {
+            const response = JSON.parse(xhr.responseText)
+            if (response.Code === 200) {
+              resolve(response.Data)
+            } else {
+              reject(response.Message)
+            }
+          } catch (error) {
+            console.error(`[imedx ajax error('${opts.url}')]:${error}`)
+            reject(error)
+          }
+        })
+        .catch(xhr => {
+          if (xhr) {
+            console.error(`[imedx ajax error('${opts.url}')]:${xhr}`)
+            reject(xhr) // 失败
+          } else {
+            console.error(`[imedx ajax error('${opts.url}')]:${xhr}`)
+            // alert(xhr.responseText)
+          }
+        })
+    })
+  }
+
+  // ajax请求
+  private static _ajax(opts: ExecOptons): Promise<XMLHttpRequest> {
+    let that = this
+    return new Promise<XMLHttpRequest>(function(resolve, reject) {
+      try {
+        let xhr = that._httpRequest(opts)
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              try {
+                resolve(xhr)
+              } catch (error) {
+                reject(xhr)
+              }
+            } else reject(xhr)
+          }
+        }
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  // 发起请求函数
+  private static _httpRequest(opts: ExecOptons): XMLHttpRequest {
+    let _option = new ExecOptons()
+    this.extend(_option, opts)
+    var xhr = this._getXMLHttpRequest()
+    if (_option.timeout > 0) xhr.timeout = _option.timeout
+    if (_option.method.toUpperCase() === 'POST') {
+      xhr.open(_option.method, _option.url, _option.async)
+      xhr.setRequestHeader('Content-Type', _option.contentType)
+      xhr.send(JSON.stringify(_option.data))
+    } else if (_option.method.toUpperCase() === 'GET') {
+      var params = []
+      for (var key in _option.data) {
+        params.push(key + '=' + _option.data[key])
+      }
+      console.log(_option.url + (params.length > 0 ? `?${params.join('&')}` : ''))
+      xhr.open(
+        _option.method,
+        _option.url + (params.length > 0 ? `?${params.join('&')}` : ''),
+        _option.async
+      )
+      xhr.send(null)
+    }
+    return xhr
+  }
+
+  // 创建XMLHttpRequest
+  private static _getXMLHttpRequest(): XMLHttpRequest {
+    // let XMLHttpRequest = require('xhr2');
+    let xhr: XMLHttpRequest = new XMLHttpRequest()
+    if (xhr.overrideMimeType) {
+      xhr.overrideMimeType('text/xml')
+    }
+    return xhr
   }
 }

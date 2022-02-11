@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 23:09:25
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 23:04:40
+ * @LastEditTime: 2022-02-12 00:52:34
  * @Descripttion:
  * @FilePath: \src\core\block_ui.ts
  */
@@ -17,7 +17,7 @@ export default class UIBlock implements IBlockUI {
       this._uiBlockArea.classList.add('ics-block-area')
     }
   }
-  block(opts: UIOptions): void {
+  public block(opts: UIOptions): void {
     if (!opts) opts = new UIOptions()
     let $elm = (opts.elm && document.querySelector(opts.elm)) || document.body
     if (opts.busy) {
@@ -42,7 +42,7 @@ export default class UIBlock implements IBlockUI {
     }
   }
 
-  unblock(opts: UIOptions): void {
+  public unblock(opts: UIOptions): void {
     if (!opts) opts = new UIOptions()
     let element = document.querySelector('.ics-block-area')
     if (element) {
@@ -55,14 +55,15 @@ export default class UIBlock implements IBlockUI {
       }, 250)
     }
   }
-  setBusy(opts: UIOptions): void {
+  public setBusy(opts: UIOptions): void {
     if (!opts) {
       opts = new UIOptions()
       opts.busy = true
     }
     this.block(opts)
   }
-  clearBusy(opts: UIOptions): void {
+
+  public clearBusy(opts: UIOptions): void {
     this.unblock(opts)
   }
 }
