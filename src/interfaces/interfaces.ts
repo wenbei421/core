@@ -2,52 +2,66 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:24:51
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-12 02:06:01
+ * @LastEditTime: 2022-02-18 00:14:06
  * @Descripttion:
  * @FilePath: \src\interfaces\interfaces.ts
  */
+export interface IPackage {
+  /**
+   * @description: 打包
+   * @param {dir} 目录
+   * @param {pkgFile} 包文件
+   */
+  packageSync(dir: string, pkgFile: string): Promise<void>
 
-export class ExecOptons {
-  public url!: string
-  public method: string = 'GET'
-  public data: any
-  public timeout: number = 0
-  public contentType: string = 'text/xml; charset=UTF-8'
-  public async: boolean = true
+  /**
+   * @description: 合并脚本
+   * @param {dir} 目录
+   * @param {scriptFile} 脚本文件
+   */
+  scriptSync(dir: string, scriptFile: string): Promise<void>
+
+  /**
+   * @description:写入数据到指定文件
+   * @param {file} 文件路径
+   * @param {data} 数据对象
+   */
+  writeSync(file: string, data: Object): Promise<void>
+
+  /**
+   * @description:处理权限
+   * @param {routes} 路由数组
+   */
+  permission(routes: Array<Route>): void
 }
 
-export class UIOptions {
-  public elm: string | null = null
-  public busy: boolean = false
-  public promise: Promise<any> | undefined = undefined
+export class Route {
+  public path?: string
+  public name?: string
+  public component: object = {}
+  public meta?: Metadata
+  public children?: Array<Route>
 }
 
-export interface IEvent {
-  $on(eventName: string, callback: Function): void
-  $off(eventName: string, callback: Function): void
-  $emit(eventName: string): void
+export class Metadata {
+  public id?: string
+  public title?: string
+  public path?: string
+  public icon?: string
+  public affix: boolean = false
+  public color?: string
+  public remark?: string
+  public permissions: Array<Permission> = []
+  public scenes: Array<string> = []
+  public params: Param = { client: [], system: [] }
 }
 
-export interface IBlockUI {
-  block(opts: UIOptions): void
-  unblock(opts: UIOptions): void
-  setBusy(opts: UIOptions): void
-  clearBusy(opts: UIOptions): void
+export class Permission {
+  public id?: string
+  public name?: string
 }
 
-export enum LogLevels {
-  DEBUG = 1,
-  INFO,
-  WARN,
-  ERROR,
-  FATAL
-}
-
-export interface ILogger {
-  level: LogLevels
-  debug(logObject: any): void
-  info(logObject: any): void
-  warn(logObject: any): void
-  error(logObject: any): void
-  fatal(logObject: any): void
+export class Param {
+  public client: Array<string> = []
+  public system: Array<string> = []
 }

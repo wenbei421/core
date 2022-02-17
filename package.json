@@ -1,11 +1,11 @@
 {
-  "name": "@icreate/core",
-  "version": "0.0.15",
-  "description": "Ics核心包封装",
+  "name": "@icreate/package",
+  "version": "0.0.6",
+  "description": "Ics核心打包工具类",
   "keywords": [],
-  "main": "dist/ics.umd.js",
-  "module": "dist/ics.es5.js",
-  "typings": "dist/types/ics.d.ts",
+  "main": "dist/package.umd.js",
+  "module": "dist/package.es5.js",
+  "typings": "dist/types/package.d.ts",
   "files": [
     "dist"
   ],
@@ -21,7 +21,8 @@
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
+    "build-bak": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
@@ -85,7 +86,7 @@
     "@commitlint/cli": "^7.1.2",
     "@commitlint/config-conventional": "^7.1.2",
     "@types/jest": "^23.3.2",
-    "@types/node": "^10.11.0",
+    "@types/node": "^10.17.60",
     "colors": "^1.3.2",
     "commitizen": "^3.0.0",
     "coveralls": "^3.0.2",
@@ -117,5 +118,8 @@
     "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.12.0",
     "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "jszip": "^3.7.1"
   }
 }

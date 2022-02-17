@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 21:36:57
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-09 17:37:49
+ * @LastEditTime: 2022-02-17 23:48:54
  * @Descripttion:
  * @FilePath: \rollup.config.ts
  */
@@ -16,7 +16,7 @@ import {uglify} from 'rollup-plugin-uglify'
 
 const pkg = require('./package.json')
 
-const libraryName = 'ics'
+const libraryName = 'package'
 
 export default {
   input: `src/${libraryName}.ts`,
@@ -25,7 +25,7 @@ export default {
     { file: pkg.module, format: 'es', sourcemap: true },
   ],
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-  external: [],
+  external: ['fs','os','path','jszip'],
   watch: {
     include: 'src/**',
   },
