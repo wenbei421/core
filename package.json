@@ -1,6 +1,6 @@
 {
   "name": "@icreate/package",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Ics核心打包工具类",
   "keywords": [],
   "main": "dist/package.umd.js",

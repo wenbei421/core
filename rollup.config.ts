@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 21:36:57
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-17 23:48:54
+ * @LastEditTime: 2022-02-18 08:58:50
  * @Descripttion:
  * @FilePath: \rollup.config.ts
  */
@@ -42,5 +42,6 @@ export default {
     resolve(),
     // Resolve source maps to the original source
     sourceMaps(),
+    // uglify(),
   ],
 }
