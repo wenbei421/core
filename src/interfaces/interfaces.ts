@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 22:24:51
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-12 02:06:01
+ * @LastEditTime: 2022-03-11 08:49:46
  * @Descripttion:
  * @FilePath: \src\interfaces\interfaces.ts
  */
@@ -45,9 +45,9 @@ export enum LogLevels {
 
 export interface ILogger {
   level: LogLevels
-  debug(logObject: any): void
-  info(logObject: any): void
-  warn(logObject: any): void
-  error(logObject: any): void
-  fatal(logObject: any): void
+  debug(logObject: any, message: string): void
+  info(logObject: any, message: string): void
+  warn(logObject: any, message: string): void
+  error(logObject: any, message: string): void
+  fatal(logObject: any, message: string): void
 }
