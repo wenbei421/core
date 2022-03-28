@@ -3,9 +3,9 @@
   "version": "0.0.23",
   "description": "Ics核心包封装",
   "keywords": [],
-  "main": "dist/ics.umd.js",
-  "module": "dist/ics.es5.js",
-  "typings": "dist/types/ics.d.ts",
+  "main": "dist/package.umd.js",
+  "module": "dist/package.es5.js",
+  "typings": "dist/types/package.d.ts",
   "files": [
     "dist"
   ],
@@ -21,7 +21,8 @@
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
+    "build-bak": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
