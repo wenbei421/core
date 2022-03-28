@@ -2,11 +2,12 @@
  * @Author: 文贝
  * @Date: 2022-02-09 00:39:00
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-12 00:29:26
+ * @LastEditTime: 2022-03-28 13:17:46
  * @Descripttion:
  * @FilePath: \src\core\utils.ts
  */
 import { ExecOptons } from '../interfaces/interfaces'
+const md5 = require('js-md5');
 
 export default class Utils {
   private static _baseCommandUrl: string = 'http://command.com/'
@@ -74,6 +75,21 @@ export default class Utils {
     return str.charAt(0).toLowerCase() + str.substring(1)
   }
 
+  //驼峰转短横线
+  public static CamelCasetoKebab(value: string) {
+    return value.replace(/([A-Z])/g, '-$1').toLowerCase()
+  }
+
+  //短横线转小驼峰
+  public static KebabtoCamelCase(value: string) {
+    return value.replace(/-(\w)/g, ($0, $1) => $1.toUpperCase())
+  }
+
+  //短横线转大驼峰
+  public static KebabtoPascalCase(value: string) {
+    return value[0].toUpperCase() + value.slice(1).replace(/-(\w)/g, ($0, $1) => $1.toUpperCase())
+  }
+
   public static truncateString(str: string, maxLength: number): string {
     if (!str || !str.length || str.length <= maxLength) {
       return str
@@ -95,6 +111,11 @@ export default class Utils {
 
   public static isFunction(obj: any): boolean {
     return !!(obj && obj.constructor && obj.call && obj.apply)
+  }
+
+  public static isString(obj: any) {
+    //判断对象是否是字符串
+    return Object.prototype.toString.call(obj) === '[object String]'
   }
 
   /**
@@ -193,7 +214,6 @@ export default class Utils {
     return dstObj
   }
 
-
   public static command(opts: ExecOptons): void {
     let link = document.createElement('a')
     let params: Array<string> = []
@@ -206,6 +226,10 @@ export default class Utils {
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
+  }
+
+  public static md5(message: string): string {
+    return md5(message)
   }
 
   public static function(opts: ExecOptons): Promise<any> {
