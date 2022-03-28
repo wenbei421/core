@@ -2,7 +2,7 @@
  * @Author: 文贝
  * @Date: 2022-02-08 21:36:57
  * @LastEditors: 文贝
- * @LastEditTime: 2022-02-12 02:10:59
+ * @LastEditTime: 2022-02-12 02:25:50
  * @Descripttion: 
  * @FilePath: \README.md
 -->
@@ -74,4 +74,16 @@ import { ics, Event, BlockUI, Logger, Utils, LogLevels, ExecOptons, UIOptions } 
   extend(dstObj: object, srcObj: object): object
   command(opts: ExecOptons): void
   function(opts: ExecOptons): Promise<any> 
+```
+
+### ics
+
+```javascript
+  appPath: string = '/'
+  pageLoadTime = new Date()
+  toAbsAppPath(path: string): string
+  event: IEvent
+  ui: IBlockUI
+  log: ILogger
+  utils: Utils
 ```
